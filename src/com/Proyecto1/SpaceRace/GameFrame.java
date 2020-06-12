@@ -10,9 +10,9 @@ import java.io.IOException;
 public class GameFrame extends JFrame {
     public int players;
     public static GamePanel panel_1, panel_2 ,panel_3 ,panel_4;
-    public JDesktopPane mainPane;
+    private JDesktopPane mainPane;
     public static JInternalFrame iframe1, iframe2, iframe3, iframe4;
-    public boolean inGame;
+    private boolean inGame;
 
     public GameFrame(int players) throws IOException {
         this.players = players;
@@ -26,12 +26,23 @@ public class GameFrame extends JFrame {
             boolean temp = true;
             while (temp){
                 for(GamePanel panel: panelarray){
+                    //System.out.println(panel.player);
                     panel.checkWin();
+                    //System.out.println("hola");
                     if(panel.win){
-                        System.out.println("Player" + panel.getPlayer() + "won, congrats!");
+                        //System.out.println("Player" + panel.getPlayer() + "won, congrats!");
+                        panel.stopShip();
+                        for(GamePanel panel1: panelarray){
+                            stopMovement(panel1);
+                        }
                         temp = false;
+                        inGame = false;
+
                     }
                 }
+                /*for(GamePanel panel = null; panelarray) {
+                    panel.shipStop();
+                }*/
             }
 
             /*for(GamePanel panel: panelarray){
@@ -127,6 +138,11 @@ public class GameFrame extends JFrame {
 
     }
 
+    public void stopMovement(GamePanel panel){
+        panel.stopShip();
+    }
+
+    // arreglar para cauando juegan menos asjdaejidcnwejfebfijwenbfjwebfhuwe
     public void keyEvent(JFrame frame){
         frame.addKeyListener(new KeyListener() {
             @Override

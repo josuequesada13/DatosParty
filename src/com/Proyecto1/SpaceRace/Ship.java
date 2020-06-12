@@ -67,12 +67,21 @@ public class Ship extends Sprite{
         return new Rectangle(x,y,width,height);
     }
 
-    public void checkWin(){
-        if(points == 4){
-            movement = false;
-            win = true;
-            respawn();
+    public boolean checkWin(){
+        if(points == 2){
+            //movement = false;
+            //win = true;
+            //respawn();
+            //getWin();
+            return true;
         }
+        return false;
+    }
+
+    public void stopShip(){
+        movement = false;
+        win = true;
+        respawn();
     }
 
     public boolean getWin(){

@@ -3,7 +3,6 @@ package com.Proyecto1.SpaceRace;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -114,16 +113,27 @@ public class GamePanel extends JPanel {
         this.ship1.dy = 0;
     }
 
-    public void checkWin(){
+    public boolean checkWin(){
         ship1.checkWin();
         if(ship1.getWin()){
-            ship1.setMovement(false);
-            win = true;
+            setwin();
+            return true;
+            //ship1.setMovement(false);
+            //win = true;
         }
+        return false;
+    }
+
+    public void stopShip(){
+        this.ship1.stopShip();
     }
 
     public int getPlayer(){
         return player;
+    }
+
+    public void setwin(){
+        this.win = true;
     }
 }
 
