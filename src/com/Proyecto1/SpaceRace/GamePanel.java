@@ -8,7 +8,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
+
 public class GamePanel extends JPanel {
+
+    /**
+     * Class that creates a single panel where the game develops
+     * @author Josue Quesada
+     * @version 06/06/2020
+     *
+     */
+
     public int player;
     private Ship ship1;
     private Timer timer;
@@ -16,11 +25,11 @@ public class GamePanel extends JPanel {
     private Image background;
     public boolean win;
 
-    public int x;
-    public int y;
-
-
-
+    /**
+     * This method creates the panel where the ship will appear
+     * and move
+     * @player
+     */
     public GamePanel(int player) throws IOException {
         super();
         this.player = player;
@@ -28,6 +37,10 @@ public class GamePanel extends JPanel {
         startAsteroid();
     }
 
+    /**
+     * Sets the size for the window and creates the ship object
+     * @throws IOException
+     */
     public void start() throws IOException {
         this.asteroidList = new ArrayList<>();
         setPreferredSize(new Dimension(350, 350));
@@ -39,6 +52,10 @@ public class GamePanel extends JPanel {
         setBackground();
     }
 
+    /**
+     * Creates the asteroids, sets their directions and saves them in an array
+     * @throws IOException
+     */
     private void startAsteroid() throws IOException {
         for(int i=0; i<10; i++){
             int direction = ThreadLocalRandom.current().nextInt(0,2);
@@ -53,13 +70,19 @@ public class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * Constantly checks if the ship got a point and updates its position
+     */
     public void doLoop(){
         updateMovement();
         ship1.gotPoint();
-        checkWin();
+        //checkWin();
         repaint();
     }
 
+    /**
+     * Updates the ship`s position
+     */
     public void updateMovement(){
         this.ship1.move();
         for(Asteroid asteroid:this.asteroidList){
@@ -109,27 +132,20 @@ public class GamePanel extends JPanel {
         this.ship1.dy = 2;
     }
 
-    public void shipStop(){
+    public void shipPause(){
         this.ship1.dy = 0;
     }
 
     public boolean checkWin(){
-        ship1.checkWin();
-        if(ship1.getWin()){
+        if(ship1.checkWin()){
             setwin();
             return true;
-            //ship1.setMovement(false);
-            //win = true;
         }
         return false;
     }
 
     public void stopShip(){
-        this.ship1.stopShip();
-    }
-
-    public int getPlayer(){
-        return player;
+        this.ship1.stop();
     }
 
     public void setwin(){

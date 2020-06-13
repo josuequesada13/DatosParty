@@ -59,32 +59,19 @@ public class Ship extends Sprite{
         }
     }
 
-    public void setMovement(boolean movement) {
-        this.movement = movement;
-    }
-
     public Rectangle getBounds(){
         return new Rectangle(x,y,width,height);
     }
 
     public boolean checkWin(){
-        if(points == 2){
-            //movement = false;
-            //win = true;
-            //respawn();
-            //getWin();
+        if(points == 3){
             return true;
         }
         return false;
     }
 
-    public void stopShip(){
+    public void stop(){
         movement = false;
-        win = true;
         respawn();
-    }
-
-    public boolean getWin(){
-        return win;
     }
 }
